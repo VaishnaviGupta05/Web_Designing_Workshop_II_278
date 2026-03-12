@@ -1,0 +1,24 @@
+/* Creating a responsive button from scratch */
+.my-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.my-button:hover {
+  background-color: #0056b3;
+}
+.my-button:active {
+  transform: scale(0.98);
+}
+/* Now make it responsive */
+@media (max-width: 768px) {
+  .my-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
