@@ -9,7 +9,7 @@ function calculateResult() {
     let totalMarks = 0;
 
     for (let i = 1; i <= numSubjects; i++) {
-        let mark = parseFloat(prompt("Enter marks for Subject " + i + " (out of 100):"));
+        let mark = parseFloat(prompt("Enter marks for Subject " + i + " (out of 100):")); 
         if (isNaN(mark) || mark < 0 || mark > 100) {
             alert("Invalid marks for Subject " + i + ". Please enter a value between 0 and 100.");
             return;
