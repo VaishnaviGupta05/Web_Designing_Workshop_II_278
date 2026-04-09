@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Amazon Clone</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family:Arial; }
+
+body { background:#eaeded; }
+
+/* NAVBAR */
+.navbar {
+  background:#131921;
+  color:white;
+  display:flex;
+  align-items:center;
+  padding:10px 20px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+.logo { font-size:24px; font-weight:bold; margin-right:20px; }
+
+.search { flex:1; display:flex; }
+.search input { width:100%; padding:10px; border:none; }
+.search select, .search button { padding:10px; border:none; }
+.search button { background:#febd69; }
+
+.nav-right { display:flex; gap:20px; font-size:12px; }
+.cart { font-size:18px; }
+
+/* MENU */
+.menu {
+  background:#232f3e;
+  color:white;
+  padding:10px;
+  display:flex;
+  gap:15px;
+}
+
+/* HERO */
+.hero img {
+  width:100%;
+  height:350px;
+  object-fit:cover;
+}
+
+/* PRODUCTS */
+.products {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  padding:20px;
+}
+
+.card {
+  background:white;
+  padding:15px;
+  border-radius:5px;
+  transition:0.3s;
+}
+
+.card:hover {
+  transform:scale(1.03);
+  box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.card img {
+  width:100%;
+  height:200px;
+  object-fit:contain;
+}
+
+.title { font-size:14px; margin:10px 0; }
+.price { color:#b12704; font-weight:bold; }
+.rating { color:#ffa41c; }
+
+button {
+  background:#ffd814;
+  border:1px solid #fcd200;
+  padding:8px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+button:hover { background:#f7ca00; }
+
+.badge {
+  background:red;
+  color:white;
+  font-size:12px;
+  padding:3px 5px;
+  display:inline-block;
+}
+
+/* DEALS */
+.deals {
+  background:white;
+  margin:20px;
+  padding:15px;
+}
+
+.deal-container {
+  display:flex;
+  overflow-x:auto;
+  gap:15px;
+}
+
+.deal-card {
+  min-width:200px;
+  background:#f7f7f7;
+  padding:10px;
+}
+
+.deal-card img { width:100%; }
+
+/* BACK TO TOP */
+#topBtn {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  padding:10px;
+  display:none;
+  background:black;
+  color:white;
+}
+
+/* FOOTER */
+.footer {
+  background:#232f3e;
+  color:white;
+}
+
+.footer-top {
+  background:#37475a;
+  text-align:center;
+  padding:10px;
+  cursor:pointer;
+}
+
+.footer-content {
+  display:flex;
+  justify-content:space-around;
+  padding:20px;
+}
+
+.footer-bottom {
+  text-align:center;
+  padding:10px;
+  background:#131921;
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">amazon.in</div>
+
+  <div class="search">
+    <select><option>All</option></select>
+    <input type="text" id="searchBox" placeholder="Search Amazon.in">
+    <button onclick="searchProduct()">🔍</button>
+  </div>
+
+  <div class="nav-right">
+    <div>Hello, Sign in</div>
+    <div>Orders</div>
+    <div class="cart">🛒 <span id="cartCount">0</span></div>
+  </div>
+</header>
+
+<nav class="menu">
+  <span>All</span>
+  <span>Today's Deals</span>
+  <span>Mobiles</span>
+  <span>Electronics</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img id="slider">
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products"></section>
+
+<!-- DEALS -->
+<section class="deals">
+  <h2>Today's Deals</h2>
+  <div class="deal-container" id="deals"></div>
+</section>
+
+<!-- BACK TO TOP -->
+<button id="topBtn">⬆</button>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top" onclick="scrollTop()">Back to top</div>
+
+  <div class="footer-content">
+    <div><h4>Get to Know Us</h4><p>About</p><p>Careers</p></div>
+    <div><h4>Connect</h4><p>Instagram</p><p>Twitter</p></div>
+    <div><h4>Make Money</h4><p>Sell</p><p>Affiliate</p></div>
+  </div>
+
+  <div class="footer-bottom">© Amazon Clone</div>
+</footer>
+
+<script>
+// SLIDER
+const images = [
+ "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Beauty/GW/Makeup-PC._CB123456789_.jpg",
+ "https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/GW._CB123456789_.jpg"
+];
+
+let i = 0;
+function slider() {
+  document.getElementById("slider").src = images[i];
+  i = (i + 1) % images.length;
+}
+setInterval(slider, 3000);
+slider();
+
+// PRODUCTS
+const products = [
+ {id:1,name:"iPhone 14",price:79999,img:"https://m.media-amazon.com/images/I/61cwywLZR-L._SX679_.jpg"},
+ {id:2,name:"Laptop",price:55999,img:"https://m.media-amazon.com/images/I/71jG+e7roXL._SX679_.jpg"},
+ {id:3,name:"Headphones",price:2999,img:"https://m.media-amazon.com/images/I/61KNJav3S9L._SX679_.jpg"},
+ {id:4,name:"Shoes",price:1999,img:"https://m.media-amazon.com/images/I/71li-ujtlUL._UX695_.jpg"}
+];
+
+let cart=[];
+
+function renderProducts(list){
+  let container=document.getElementById("products");
+  container.innerHTML="";
+  list.forEach(p=>{
+    container.innerHTML+=`
+    <div class="card">
+      <div class="badge">Deal</div>
+      <img src="${p.img}">
+      <div class="title">${p.name}</div>
+      <div class="price">₹${p.price}</div>
+      <button onclick="addToCart(${p.id})">Add to Cart</button>
+    </div>`;
+  });
+}
+
+function addToCart(id){
+  cart.push(id);
+  document.getElementById("cartCount").innerText=cart.length;
+}
+
+// SEARCH
+function searchProduct(){
+  let val=document.getElementById("searchBox").value.toLowerCase();
+  let filtered=products.filter(p=>p.name.toLowerCase().includes(val));
+  renderProducts(filtered);
+}
+
+renderProducts(products);
+
+// DEALS
+const deals=[
+ {img:"https://m.media-amazon.com/images/I/61cwywLZR-L._SX679_.jpg",price:"₹59,999"},
+ {img:"https://m.media-amazon.com/images/I/71jG+e7roXL._SX679_.jpg",price:"₹45,000"}
+];
+
+let dealBox=document.getElementById("deals");
+deals.forEach(d=>{
+  dealBox.innerHTML+=`
+  <div class="deal-card">
+    <img src="${d.img}">
+    <p>${d.price}</p>
+  </div>`;
+});
+
+// SCROLL TOP
+let btn=document.getElementById("topBtn");
+window.onscroll=()=>{
+  btn.style.display=document.documentElement.scrollTop>200?"block":"none";
+};
+
+btn.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
+</script>
+
+</body>
+</html>
