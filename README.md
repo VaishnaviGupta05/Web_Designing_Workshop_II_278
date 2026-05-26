@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Web_Designing_Workshop_II_278
 Web designing workshop for 2nd semester.
 =======
@@ -73,3 +74,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 >>>>>>> cf8f2ad (Initial commit)
+=======
+# Web_Designing_Workshop_II_278
+Web designing workshop for 2nd semester.
+>>>>>>> c73fc215b534b595d9882d2d46222b573f2f121d
